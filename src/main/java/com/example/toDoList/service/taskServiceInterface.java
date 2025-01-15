@@ -8,4 +8,5 @@ import com.example.toDoList.dto.viewTaskDto;
 public interface taskServiceInterface {
     String addtask(addTaskDto addtaskdto);
     List<viewTaskDto> view();
+    boolean deletetask(int id);
 }

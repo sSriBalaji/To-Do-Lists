@@ -33,7 +33,7 @@ public class taskService implements taskServiceInterface{
             List<list> allTasks = taskrepo.findAll();
 
             List<viewTaskDto> tasks = new ArrayList<>();
-            
+
             for(list task : allTasks){
                 viewTaskDto viewtask = new viewTaskDto(
                     task.getId(),
@@ -45,4 +45,17 @@ public class taskService implements taskServiceInterface{
             return tasks;
         
     }
+
+
+    @Override
+    public boolean deletetask(int id) {
+        if(taskrepo.existsById(id)){
+            taskrepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+    
 }
