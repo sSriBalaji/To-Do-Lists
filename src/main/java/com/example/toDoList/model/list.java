@@ -21,6 +21,15 @@ public class list {
     @Column(name="description", length= 200)
     private String description;
 
+    public list() {
+    }
+
+    public list(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
+
     public list(String name, String description) {
         this.name = name;
         this.description = description;
