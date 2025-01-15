@@ -17,4 +17,5 @@ public interface taskServiceInterface {
     boolean completetask(int id);
     void completetask(completeTaskDto completetaskdto);
     List<viewCompletedTaskDto> viewcompleted();
+    boolean undo(int id);
 }

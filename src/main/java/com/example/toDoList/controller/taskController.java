@@ -4,7 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.toDoList.dto.addTaskDto;
-import com.example.toDoList.dto.completeTaskDto;
 import com.example.toDoList.dto.updateTaskDto;
 import com.example.toDoList.dto.viewCompletedTaskDto;
 import com.example.toDoList.dto.viewTaskDto;
@@ -66,6 +65,12 @@ public class taskController {
     @GetMapping("/complete/view")
     public List<viewCompletedTaskDto> viewCompleted(){
         return taskservice.viewcompleted();
+    }
+
+    @PostMapping("complete/undo/{id}")
+    public String undoCompletedTask(@PathVariable(value = "id")int id){
+        boolean response = taskservice.undo(id);
+        return (response)?"undone":"can't be undone";
     }
 
 

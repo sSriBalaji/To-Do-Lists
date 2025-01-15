@@ -130,6 +130,40 @@ public class taskService implements taskServiceInterface{
         return completedTasks;
     }
 
+    // @Override
+    // @Transactional
+    // public boolean undo(int id){
+    //     if(completerepo.existsById(id)){
+    //         completedEvents events = completerepo.getById(id);
+    //         list task = new list(
+    //             events.getId(),
+    //             events.getName(),
+    //             events.getDescription()
+    //         );
+    //         taskrepo.save(task);
+    //         completerepo.deleteById(id);
+    //         return true;
 
+    //     }
+    //     return false;
+    // }
+
+    @Override
+    @Transactional
+    public boolean undo(int id) {
+        if (completerepo.existsById(id)) {
+            completedEvents events = completerepo.getById(id);
+
+            list task = new list();
+            task.setName(events.getName());
+            task.setDescription(events.getDescription());
+            
+            taskrepo.save(task);
+            completerepo.deleteById(id);
+            
+            return true;
+        }
+        return false;
+    }
     
 }
