@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.toDoList.dto.addTaskDto;
+import com.example.toDoList.dto.updateTaskDto;
 import com.example.toDoList.dto.viewTaskDto;
 import com.example.toDoList.model.list;
 import com.example.toDoList.repository.taskRepository;
@@ -51,6 +52,19 @@ public class taskService implements taskServiceInterface{
     public boolean deletetask(int id) {
         if(taskrepo.existsById(id)){
             taskrepo.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean edittask(updateTaskDto updatetaskdto) {
+        if(taskrepo.existsById(updatetaskdto.getId())){
+            list task = taskrepo.getById(updatetaskdto.getId());
+            task.setName(updatetaskdto.getName());
+            task.setDescription(updatetaskdto.getDescription());
+            taskrepo.save(task);
             return true;
         }
         return false;
