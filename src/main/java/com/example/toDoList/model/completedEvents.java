@@ -19,6 +19,9 @@ public class completedEvents {
     @Column(name = "description",length = 200)
     private String description;
 
+    public completedEvents() {
+    }
+
     public completedEvents(String name, String description) {
         this.name = name;
         this.description = description;

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.toDoList.dto.addTaskDto;
 import com.example.toDoList.dto.completeTaskDto;
 import com.example.toDoList.dto.updateTaskDto;
+import com.example.toDoList.dto.viewCompletedTaskDto;
 import com.example.toDoList.dto.viewTaskDto;
 import com.example.toDoList.model.completedEvents;
 import com.example.toDoList.model.list;
@@ -110,6 +111,23 @@ public class taskService implements taskServiceInterface{
             taskrepo.deleteById(completetaskdto.getId());
             
         }  
+    }
+
+
+    @Override
+    public List<viewCompletedTaskDto> viewcompleted() {
+        List<completedEvents> tasks = completerepo.findAll();
+
+        List<viewCompletedTaskDto> completedTasks = new ArrayList<>();
+        for(completedEvents task : tasks){
+            viewCompletedTaskDto event = new viewCompletedTaskDto(
+                task.getId(),
+                task.getName(),
+                task.getDescription()
+            );
+            completedTasks.add(event);
+        }
+        return completedTasks;
     }
 
 

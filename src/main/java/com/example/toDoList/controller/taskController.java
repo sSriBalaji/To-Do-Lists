@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.toDoList.dto.addTaskDto;
 import com.example.toDoList.dto.completeTaskDto;
 import com.example.toDoList.dto.updateTaskDto;
+import com.example.toDoList.dto.viewCompletedTaskDto;
 import com.example.toDoList.dto.viewTaskDto;
 import com.example.toDoList.service.taskService;
 
@@ -62,11 +63,18 @@ public class taskController {
         return "completed";
     }
 
-    //complete the task by dto
-    @PostMapping("/complete")
-    public void completeTask(@RequestBody completeTaskDto compltetaskdto) {
-        taskservice.completetask(compltetaskdto);
+    @GetMapping("/complete/view")
+    public List<viewCompletedTaskDto> viewCompleted(){
+        return taskservice.viewcompleted();
     }
+
+
+    //complete the task by dto
+    // @PostMapping("/complete")
+    // public String completeTask(@RequestBody completeTaskDto compltetaskdto) {
+    //     taskservice.completetask(compltetaskdto);
+    //     return "completed";
+    // }
     
     
     
