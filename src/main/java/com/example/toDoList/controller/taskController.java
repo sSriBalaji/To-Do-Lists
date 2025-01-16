@@ -1,7 +1,7 @@
 package com.example.toDoList.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.toDoList.dto.addTaskDto;
 import com.example.toDoList.dto.updateTaskDto;
@@ -12,6 +12,8 @@ import com.example.toDoList.service.taskService;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,28 +25,39 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 @CrossOrigin
-@RestController
-@RequestMapping("api/v1")
+@Controller
+@RequestMapping("/Tasks")
 public class taskController {
 
 
     @Autowired
     private taskService taskservice;
 
+
+    @GetMapping("/add")
+    public String showAddTaskPage() {
+    return "addTask"; // Corresponds to addTask.html
+}
     @PostMapping("/add")
-    public String addTask(@RequestBody addTaskDto addtaskdto) {
+    public String addTask(@RequestParam String name, @RequestParam String description) {
+        addTaskDto addtaskdto = new addTaskDto();
+        addtaskdto.setName(name);;
+        addtaskdto.setDescription(description);
         taskservice.addtask(addtaskdto);
-        return "ok";
+        return "redirect:/Tasks/view";
     }
 
     @GetMapping("/view")
-    public List<viewTaskDto> viewTask() {
-        return taskservice.view();
+    public String viewTask(Model model) {
+    
+        List<viewTaskDto> allTasks =  taskservice.view();
+        model.addAttribute("events", allTasks);
+        return "index";
 
     }
 
-    @PutMapping("/edit")
-    public String editTask(@RequestBody updateTaskDto updatetaskdto) {
+    @PutMapping("/edit/{id}")
+    public String editTask(@PathVariable(value = "id")  @RequestBody updateTaskDto updatetaskdto) {
         boolean response = taskservice.edittask(updatetaskdto);
         return (response)?"updated":"the id doesn't exsists";
     }
@@ -63,8 +76,10 @@ public class taskController {
     }
 
     @GetMapping("/complete/view")
-    public List<viewCompletedTaskDto> viewCompleted(){
-        return taskservice.viewcompleted();
+    public String viewCompleted(Model model){
+        List<viewCompletedTaskDto> cEvents = taskservice.viewcompleted();
+        model.addAttribute("cEvents", cEvents);
+        return "completedTasks";
     }
 
     @PostMapping("complete/undo/{id}")
