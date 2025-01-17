@@ -29,7 +29,7 @@
                         <td th:text="${Task.name}"></td>
                         <td th:text="${Task.description}"></td>
                         <td style="whilte-space:nowrap">
-                            <!-- <a th:href="@{Tasks/edit/(id=${Task.id})}" class="btn btn-primary" role="button" aria-pressed="true">EDIT</a> -->
+                            <a th:href="@{/Tasks/edits/{id}(id=${Task.id})}" class="btn btn-primary" role="button" aria-pressed="true">EDIT</a>
                             <a th:href="@{/Tasks/delete/{id}(id=${Task.id})}" 
                             onclick="return confirm('are you sure?')"
                             class="btn btn-primary" role="button" aria-pressed="true">DELETE</a>

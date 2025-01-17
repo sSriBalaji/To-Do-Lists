@@ -59,6 +59,22 @@ public class taskController {
         return "index";
 
     }
+    @GetMapping("/edits/{id}")
+    public String editTask(@PathVariable(value = "id")int id ,Model model){
+        updateTaskDto task = taskservice.getById(id);
+        model.addAttribute("tasks",task);
+        return "editTask";
+    }
+
+    @PostMapping("/edit")
+    public String editTask(@RequestParam int id, @RequestParam String name, @RequestParam String description){
+        updateTaskDto updatetaskdto = new updateTaskDto();
+        updatetaskdto.setId(id);
+        updatetaskdto.setName(name);
+        updatetaskdto.setDescription(description);
+        taskservice.edittask(updatetaskdto);
+        return "redirect:/Tasks/view";
+    }
     // @GetMapping("/edit/{id}")
     // public String editTask(@PathVariable(value="id")int id,Model model){
     //     updateTaskDto editingTask = taskservice.edittask(id);
