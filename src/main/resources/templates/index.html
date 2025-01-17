@@ -9,8 +9,9 @@
   <body>
         <div class="container">
             <h1 class="text-center my-4">All Tasks</h1>
+            <a th:href="@{/Tasks/view}" class="btn btn-primary">VIEW</a>
             <a th:href="@{/Tasks/add}" class="btn btn-primary">ADD</a>
-            <a th:href="@{/Tasks/complete/view}" class="btn btn-primary">COMPLETE</a>
+            <a th:href="@{/Tasks/complete/view}" class="btn btn-primary">COMPLETED</a>
 
             
             <table class="table">
@@ -28,11 +29,11 @@
                         <td th:text="${Task.name}"></td>
                         <td th:text="${Task.description}"></td>
                         <td style="whilte-space:nowrap">
-                            <a th:href="@{Tasks/edit/(id=${Task.id})}" class="btn btn-primary" role="button" aria-pressed="true">EDIT</a>
-                            <a th:href="@{Tasks/delete/(id=${Task.id})}" 
+                            <!-- <a th:href="@{Tasks/edit/(id=${Task.id})}" class="btn btn-primary" role="button" aria-pressed="true">EDIT</a> -->
+                            <a th:href="@{/Tasks/delete/{id}(id=${Task.id})}" 
                             onclick="return confirm('are you sure?')"
                             class="btn btn-primary" role="button" aria-pressed="true">DELETE</a>
-                            <a th:href="@{Tasks/complete/(id=${Task.id})}" 
+                            <a th:href="@{/Tasks/complete/{id}(id=${Task.id})}" 
                             class="btn btn-primary" role="button" aria-pressed="true">COMPLETE</a>
 
                         </td>

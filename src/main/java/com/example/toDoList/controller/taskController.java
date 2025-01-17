@@ -34,6 +34,10 @@ public class taskController {
     private taskService taskservice;
 
 
+    @GetMapping("/")
+    public String homePage(){
+        return "index";
+    }
     @GetMapping("/add")
     public String showAddTaskPage() {
     return "addTask"; // Corresponds to addTask.html
@@ -55,24 +59,30 @@ public class taskController {
         return "index";
 
     }
+    // @GetMapping("/edit/{id}")
+    // public String editTask(@PathVariable(value="id")int id,Model model){
+    //     updateTaskDto editingTask = taskservice.edittask(id);
+    //     model.addAttribute("task", editingTask);
+    //     return "editTask";
+    // }
+    // @PutMapping("/edit/{id}")
+    // public String editTask(@PathVariable(value = "id")int id) {
+    //     updateTaskDto updatetaskdto = new updateTaskDto();
+    //     taskservice.edittask(updatetaskdto);
+    //     return (response)?"updated":"the id doesn't exsists";
+    // }
 
-    @PutMapping("/edit/{id}")
-    public String editTask(@PathVariable(value = "id")  @RequestBody updateTaskDto updatetaskdto) {
-        boolean response = taskservice.edittask(updatetaskdto);
-        return (response)?"updated":"the id doesn't exsists";
-    }
-
-    @DeleteMapping("/delete/{id}")
+    @GetMapping("/delete/{id}")
     public String deleteTask(@PathVariable(value = "id")int id){
-        boolean response = taskservice.deletetask(id);
-        return (response)?"the task is deleted":"the task doesn't exsists or not deleted TRY AGAIN";
+        taskservice.deletetask(id);
+        return "redirect:/Tasks/view";
     }
 
     //compelete the task by id:
-    @PostMapping("/complete/{id}")
+    @GetMapping("/complete/{id}")
     public String completeTask(@PathVariable(value="id")int id){
         taskservice.completetask(id);
-        return "completed";
+        return "redirect:/Tasks/view";
     }
 
     @GetMapping("/complete/view")
@@ -82,10 +92,10 @@ public class taskController {
         return "completedTasks";
     }
 
-    @PostMapping("complete/undo/{id}")
+    @GetMapping("complete/undo/{id}")
     public String undoCompletedTask(@PathVariable(value = "id")int id){
-        boolean response = taskservice.undo(id);
-        return (response)?"undone":"can't be undone";
+        taskservice.undo(id);
+        return "redirect:/Tasks/view";
     }
 
 

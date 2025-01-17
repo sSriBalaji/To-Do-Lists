@@ -11,7 +11,7 @@ import com.example.toDoList.dto.viewTaskDto;
 public interface taskServiceInterface {
     String addtask(addTaskDto addtaskdto);
     List<viewTaskDto> view();
-    boolean edittask(updateTaskDto updatetaskdto);
+    // updateTaskDto edittask(int id);
     boolean deletetask(int id);
 
     boolean completetask(int id);

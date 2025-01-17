@@ -27,7 +27,7 @@
                         <td th:text="${Task.name}"></td>
                         <td th:text="${Task.description}"></td>
                         <td style="whilte-space:nowrap">
-                            <a th:href="@{Tasks/complete/undo/(id=${Task.id})}" class="btn btn-primary" role="button" aria-pressed="true">UNDO</a>
+                            <a th:href="@{/Tasks/complete/undo/{id}(id=${Task.id})}" class="btn btn-primary" role="button" aria-pressed="true">UNDO</a>
 
                         </td>
                     </tr>

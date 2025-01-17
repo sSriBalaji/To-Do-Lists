@@ -66,17 +66,17 @@ public class taskService implements taskServiceInterface{
     }
 
 
-    @Override
-    public boolean edittask(updateTaskDto updatetaskdto) {
-        if(taskrepo.existsById(updatetaskdto.getId())){
-            list task = taskrepo.getById(updatetaskdto.getId());
-            task.setName(updatetaskdto.getName());
-            task.setDescription(updatetaskdto.getDescription());
-            taskrepo.save(task);
-            return true;
-        }
-        return false;
-    }
+    // @Override
+    // public boolean edittask(updateTaskDto updatetaskdto) {
+    //     if(taskrepo.existsById(updatetaskdto.getId())){
+    //         list task = taskrepo.getById(updatetaskdto.getId());
+    //         task.setName(updatetaskdto.getName());
+    //         task.setDescription(updatetaskdto.getDescription());
+    //         taskrepo.save(task);
+    //         return true;
+    //     }
+    //     return false;
+    // }
 
 
     @Override
